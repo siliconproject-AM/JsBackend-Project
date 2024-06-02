@@ -1,0 +1,47 @@
+.d1 {
+    @include d1;
+}
+
+.d2 {
+    @include d2;
+}
+
+.d3 {
+    @include d3;
+}
+
+.d4 {
+    @include d4;
+}
+
+.d5 {
+    @include d5;
+}
+
+.d6 {
+    @include d6;
+}
+
+h1, .h1 {
+    @include h1;
+}
+
+h2, .h2 {
+    @include h2;
+}
+
+h3, .h3 {
+    @include h3;
+}
+
+h4, .h4 {
+    @include h4;
+}
+
+h5, .h5 {
+    @include h5;
+}
+
+h6, .h6 {
+    @include h6;
+}

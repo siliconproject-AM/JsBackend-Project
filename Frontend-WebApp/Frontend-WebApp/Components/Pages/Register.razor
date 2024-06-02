@@ -6,6 +6,7 @@
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.WebUtilities
 @using Frontend_WebApp.Data
+@using Microsoft.EntityFrameworkCore
 @using WebApp.Filters
 
 @inject UserManager<ApplicationUser> UserManager
@@ -26,9 +27,8 @@
             </div>
         }
         <div>
-         <EditForm Model="Input" asp-route-returnUrl="@ReturnUrl" method="post" OnValidSubmit="RegisterUser" FormName="signup" novalidate>
+         <EditForm Model="Input" asp-route-returnUrl="@ReturnUrl" method="post" OnValidSubmit="RegisterUser" FormName="signup" novalidate />
              <DataAnnotationsValidator />
-             <AntiforgeryToken />
 
             <h1>Create Account</h1>
             <p>Already have an account? <a href="/signin">Sign in here</a></p>
@@ -82,6 +82,7 @@
             </div>
         <EditForm/>
     </div>
+    </div>
 </section>
 
 
@@ -99,7 +100,19 @@
 
     public async Task RegisterUser(EditContext editContext)
     {
-        var user = new ApplicationUser { UserName = Input.Email, Email = Input.Email };
+        var user = new ApplicationUser 
+        { 
+            FirstName = Input.FirstName,
+            LastName = Input.LastName,
+            UserName = Input.Email, 
+            Email = Input.Email 
+        };
+
+        if (await UserManager.Users.AnyAsync(x => x.Email == user.Email))
+		{
+			ErrorMessage = "Email already exists.";
+			return;
+		}
 
         var result = await UserManager.CreateAsync(user, Input.Password);
 

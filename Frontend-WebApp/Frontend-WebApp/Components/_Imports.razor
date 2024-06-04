@@ -12,3 +12,7 @@
 @using Frontend_WebApp.Components
 @inject HttpClient Http
 @using Microsoft.AspNetCore.Authorization
+@using Frontend_WebApp.Data
+@using Microsoft.AspNetCore.Identity
+@inject UserManager<ApplicationUser> UserManager
+@inject SignInManager<ApplicationUser> SignInManager
